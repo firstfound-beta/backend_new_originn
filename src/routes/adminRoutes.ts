@@ -4,9 +4,9 @@ import {
   getPendingStartups,
   approveStartup,
   rejectStartup,
-  getPendingProducts,
-  approveProduct,
-  rejectProduct,
+  getPendingCompany,
+  approveCompany,
+  rejectCompany,
 } from "../controllers/adminController";
 
 const router = express.Router();
@@ -16,9 +16,9 @@ router.get("/startups/pending", getPendingStartups);
 router.patch("/startups/:id/accept", approveStartup);
 router.patch("/startups/:id/reject", rejectStartup);
 
-// Products
-router.get("/products/pending", getPendingProducts);
-router.patch("/products/:id/accept", approveProduct);
-router.patch("/products/:id/reject", rejectProduct);
+// company
+router.get("/company/pending", getPendingCompany);
+router.patch("/company/:id/accept", approveCompany);
+router.patch("/company/:id/reject", rejectCompany);
 
 export default router;

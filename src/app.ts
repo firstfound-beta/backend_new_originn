@@ -3,7 +3,7 @@ import express from "express";
 import dotenv from "dotenv";
 import { connectDB } from "./config/db";
 import startupRoutes from "./routes/startupRoutes";
-import productRoutes from "./routes/productRoutes";
+import compnayRoutes from "./routes/companyRoutes";
 import adminRoutes from "./routes/adminRoutes";
 
 dotenv.config();
@@ -14,7 +14,7 @@ app.use(express.json());
 
 // Routes
 app.use("/api/startups", startupRoutes);
-app.use("/api/products", productRoutes);
+app.use("/api/company", compnayRoutes);
 app.use("/api/admin", adminRoutes);
 
 const PORT = process.env.PORT || 5000;

@@ -20,7 +20,7 @@ export const loginStartup = async (req: Request, res: Response) => {
   const { founderMail, password } = req.body;
   console.log("mail ,pass" , founderMail, password);
   
-  const startup = await Startup.findOne({ founderMail, status: "active" });
+  const startup = await Startup.findOne({ founderMail, status: "accepted" });
 
   console.log("startup", startup)
   if (!startup || startup.password !== password) {

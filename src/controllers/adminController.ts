@@ -1,7 +1,7 @@
 // src/controllers/adminController.ts
 import { Request, Response } from "express";
 import Startup from "../models/Startup";
-import Product from "../models/Product";
+import CompleteStartupDetailsSchema from "../models/company";
 
 // View pending startups
 export const getPendingStartups = async (_req: Request, res: Response) => {
@@ -16,7 +16,7 @@ export const approveStartup = async (req: Request, res: Response) => {
 
   const startup = await Startup.findByIdAndUpdate(
     id,
-    { status: "active", password },
+    { status: "accepted", password },
     { new: true }
   );
 
@@ -39,26 +39,26 @@ export const rejectStartup = async (req: Request, res: Response) => {
   res.json({ message: "Startup rejected", startup });
 };
 
-// View pending products
-export const getPendingProducts = async (_req: Request, res: Response) => {
-  const products = await Product.find({ status: "pending" }).populate("startup", "name");
-  res.json(products);
+// View pending Company
+export const getPendingCompany = async (_req: Request, res: Response) => {
+  const companys = await CompleteStartupDetailsSchema.find({ status: "pending" }).populate("startup", "name");
+  res.json(companys);
 };
 
 // Approve product
-export const approveProduct = async (req: Request, res: Response) => {
+export const approveCompany = async (req: Request, res: Response) => {
   const { id } = req.params;
-  const product = await Product.findByIdAndUpdate(id, { status: "accepted" }, { new: true });
+  const company = await CompleteStartupDetailsSchema.findByIdAndUpdate(id, { status: "approved" }, { new: true });
 
-  if (!product) return res.status(404).json({ message: "Product not found" });
+  if (!company) return res.status(404).json({ message: "Company not found" });
 
-  res.json({ message: "Product approved", product });
+  res.json({ message: "Product approved", company });
 };
 
 // Reject product
-export const rejectProduct = async (req: Request, res: Response) => {
+export const rejectCompany = async (req: Request, res: Response) => {
   const { id } = req.params;
-  const product = await Product.findByIdAndUpdate(id, { status: "rejected" }, { new: true });
+  const product = await CompleteStartupDetailsSchema.findByIdAndUpdate(id, { status: "rejected" }, { new: true });
 
   if (!product) return res.status(404).json({ message: "Product not found" });
 

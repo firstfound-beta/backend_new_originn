@@ -41,8 +41,11 @@ export const rejectStartup = async (req: Request, res: Response) => {
 
 // View pending Company
 export const getPendingCompany = async (_req: Request, res: Response) => {
-  const companys = await CompleteStartupDetailsSchema.find({ status: "pending" }).populate("startup", "name");
-  res.json(companys);
+ const companies = await CompleteStartupDetailsSchema.find()
+    .populate("startupId");
+  console.log('companies', companies);
+  
+  res.json(companies);
 };
 
 // Approve product

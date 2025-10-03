@@ -3,9 +3,9 @@ import { Request, Response } from "express";
 import Startup from "../models/Startup";
 import CompleteStartupDetailsSchema from "../models/company";
 
-// View pending startups
+// View  startups
 export const getPendingStartups = async (_req: Request, res: Response) => {
-  const startups = await Startup.find({ status: "pending" });
+  const startups = await Startup.find();
   res.json(startups);
 };
 

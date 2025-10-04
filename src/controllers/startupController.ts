@@ -5,8 +5,22 @@ import Startup from "../models/Startup";
 // Register startup (X2)
 export const registerStartup = async (req: Request, res: Response) => {
   try {
-    const startup = new Startup(req.body);
+    console.log("Received body:", req.body);
+    //  console.log('startup', startup);
+
+    const data = {
+      ...req.body,
+      founderPhone: req.body.founderPhone?.trim() || "N/A",
+      teamMembers: Number(req.body.teamMembers || 0),
+      pitchDeckPath: req.body.pitchDeckPath || "",
+      address: req.body.address || "N/A",
+      instituteName: req.body.instituteName || "N/A",
+    };
+    const startup = new Startup(data);
+    console.log('startup', startup);
+
     await startup.save();
+    console.log("here");
     res
       .status(201)
       .json({ message: "Startup submitted for approval", startup });
@@ -18,11 +32,11 @@ export const registerStartup = async (req: Request, res: Response) => {
 // Login (only approved startups)
 export const loginStartup = async (req: Request, res: Response) => {
   const { founderMail, password } = req.body;
-  console.log("mail ,pass" , founderMail, password);
-  
+  console.log("mail ,pass", founderMail, password);
+
   const startup = await Startup.findOne({ founderMail, status: "accepted" });
 
-  console.log("startup", startup)
+  console.log("startup", startup);
   if (!startup || startup.password !== password) {
     return res
       .status(401)

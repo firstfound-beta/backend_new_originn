@@ -7,7 +7,7 @@ export interface IStartup extends Document {
   founderTitle: "Mr" | "Ms" | "Miss";
   founderName: string;
   founderMail: string;
-  founderPhone: string;
+  founderPhone?: string;
   instituteName: string;
   pitchDeckPath?: string;
   password?: string;
